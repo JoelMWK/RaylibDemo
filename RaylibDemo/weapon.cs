@@ -10,25 +10,28 @@ public class weapon
 
     private double mouseX;
     private double mouseY;
+    private double lifetime;
 
     public weapon()
     {
         origin = new Vector2(100, 100);
         bullet = new Rectangle(pos.X, pos.Y, 15, 15);
-        speed = 4;
+        speed = 10;
     }
-
     public void Update()
     {
-        if (active)
-        {
-            Shoot();
-            Draw();
-        }
-        if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+        if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT) && Raylib.GetTime() - lifetime >= 0.8f)
         {
             active = true;
+            lifetime = Raylib.GetTime();
         }
+
+        if (active)
+        {
+            Draw();
+            Shoot();
+        }
+
         if (pos.X > Raylib.GetScreenWidth() || pos.Y > Raylib.GetScreenHeight())
         {
             active = false;
@@ -48,16 +51,10 @@ public class weapon
         mouseY = Raylib.GetMousePosition().Y;
 
         Vector2 mousePosition = new Vector2((float)mouseX, (float)mouseY);
-
-        for (int i = 0; i < bulletCap; i++)
-        {
-        }
         double angle = Math.Atan2(mousePosition.Y - origin.Y, mousePosition.X - origin.X);
         double xVel = speed * Math.Cos(angle);
         double yVel = speed * Math.Sin(angle);
-
         pos.X += (float)xVel;
         pos.Y += (float)yVel;
-
     }
 }
