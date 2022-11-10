@@ -2,7 +2,7 @@ using System;
 
 public class Avatar
 {
-    private Rectangle rect;
+    public static Rectangle rect;
     private Texture2D sprite;
     private Texture2D[] spriteDirection = {
             Raylib.LoadTexture("walter.png"),
@@ -11,8 +11,6 @@ public class Avatar
             Raylib.LoadTexture("walterF.png")
     };
     private float speed = 3.5f;
-    private int hp = 10;
-    private double damageImmune = 0;
 
     public Avatar()
     {
@@ -64,14 +62,5 @@ public class Avatar
     public void Draw()
     {
         Raylib.DrawTexture(sprite, (int)rect.x, (int)rect.y, Color.WHITE);
-    }
-
-    public void Collision()
-    {
-        if (Raylib.CheckCollisionRecs(rect, Enemy.rect))
-        {
-            if (Raylib.GetTime() - damageImmune >= 1f)
-                hp--;
-        }
     }
 }

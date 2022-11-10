@@ -2,7 +2,7 @@ using System;
 
 public class Enemy
 {
-    public static Rectangle rect;
+    private Rectangle rect;
     private Texture2D sprite;
     private Texture2D[] spriteDirection = {
             Raylib.LoadTexture("turtle.png"),

@@ -15,7 +15,6 @@ while (!Raylib.WindowShouldClose())
     walter.Update();
     tortuga.Update();
     weapon.Update();
-    walter.Collision();
 
     //Grafik
     Raylib.BeginDrawing();
