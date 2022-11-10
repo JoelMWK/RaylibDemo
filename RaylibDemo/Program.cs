@@ -6,14 +6,15 @@ Raylib.SetTargetFPS(60);
 
 Texture2D bg = Raylib.LoadTexture("wallpaper.png");
 Avatar walter = new Avatar();
-Enemy tortuga = new Enemy();
-weapon weapon = new weapon();
+//Enemy tortuga = new Enemy();
+Weapon weapon = new Weapon();
+
 
 while (!Raylib.WindowShouldClose())
 {
     //Logik
     walter.Update();
-    tortuga.Update();
+    //tortuga.Update();
     weapon.Update();
 
     //Grafik
@@ -22,7 +23,7 @@ while (!Raylib.WindowShouldClose())
     //Raylib.DrawTexture(bg, 0, 0, Color.WHITE);
 
     walter.Draw();
-    tortuga.Draw();
+    //tortuga.Draw();
 
 
     Raylib.EndDrawing();

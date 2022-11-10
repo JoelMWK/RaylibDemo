@@ -1,5 +1,5 @@
 
-public class weapon
+public class Weapon
 {
     private int bulletCap = 4;
     private Rectangle bullet;
@@ -18,7 +18,7 @@ public class weapon
 
     private bool mouseLock = false;
 
-    public weapon()
+    public Weapon()
     {
         //origin = new Vector2(100, 100);
         bullet = new Rectangle(pos.X, pos.Y, 15, 15);
@@ -27,6 +27,7 @@ public class weapon
     public void Update()
     {
         Console.WriteLine(origin);
+        Console.WriteLine(pos);
         origin.X = Avatar.rect.x + Avatar.rect.width / 2;
         origin.Y = Avatar.rect.y + Avatar.rect.height / 2;
 
@@ -42,13 +43,7 @@ public class weapon
             Shoot();
             mouseLock = true;
         }
-        if (pos.X > Raylib.GetScreenWidth() || pos.Y > Raylib.GetScreenHeight())
-        {
-            active = false;
-            pos = origin;
-            mouseLock = false;
-        }
-        else if (pos.X < 0 || pos.Y < 0)
+        if (pos.X > Raylib.GetScreenWidth() || pos.Y > Raylib.GetScreenHeight() || pos.X < 0 || pos.Y < 0)
         {
             active = false;
             pos = origin;
