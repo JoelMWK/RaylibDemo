@@ -1,66 +1,49 @@
 using System;
 
-public class Avatar
+public class Player : Character
 {
-    public static Rectangle rect;
-    private Texture2D sprite;
+    Weapon weapon = new();
+
     private Texture2D[] spriteDirection = {
             Raylib.LoadTexture("walter.png"),
             Raylib.LoadTexture("walterL.png"),
             Raylib.LoadTexture("walterB.png"),
             Raylib.LoadTexture("walterF.png")
     };
-    private float speed = 3.5f;
 
-    public Avatar()
+    public Player()
     {
         sprite = Raylib.LoadTexture("walter.png");
         rect = new Rectangle(0, 0, sprite.width, sprite.height);
     }
 
-    public void Update()
+    public override void Update()
     {
         if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
         {
-            rect.x += speed;
+            rect.x += Speed;
             sprite = spriteDirection[0];
+            weapon.Update(1, new Vector2(rect.x + sprite.width, rect.y + sprite.height / 2 + 10));
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
         {
-            rect.x -= speed;
+            rect.x -= Speed;
             sprite = spriteDirection[1];
+            weapon.Update(-1, new Vector2(rect.x - 10, rect.y + sprite.height / 2));
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
         {
-            rect.y -= speed;
+            rect.y -= Speed;
             sprite = spriteDirection[2];
+            weapon.Update(2, new Vector2(rect.x + sprite.width / 2, rect.y - 10));
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
         {
-            rect.y += speed;
+            rect.y += Speed;
             sprite = spriteDirection[3];
+            weapon.Update(-2, new Vector2(rect.x + sprite.width / 2, rect.y + sprite.height + 10));
         }
 
-        if (rect.x <= 0)
-        {
-            rect.x = 0;
-        }
-        if (rect.x + sprite.width >= Raylib.GetScreenWidth())
-        {
-            rect.x = Raylib.GetScreenWidth() - sprite.width;
-        }
-        if (rect.y <= 0)
-        {
-            rect.y = 0;
-        }
-        if (rect.y + sprite.height >= Raylib.GetScreenHeight())
-        {
-            rect.y = Raylib.GetScreenHeight() - sprite.height;
-        }
-    }
-
-    public void Draw()
-    {
-        Raylib.DrawTexture(sprite, (int)rect.x, (int)rect.y, Color.WHITE);
+        base.Update();
     }
 }

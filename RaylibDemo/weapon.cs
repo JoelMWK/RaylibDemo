@@ -1,75 +1,23 @@
 
 public class Weapon
 {
-    private int bulletCap = 4;
-    private Rectangle bullet;
-    private Vector2 pos;
-    private Vector2 origin;
-    private double speed;
-    private bool active = false;
-
-    private double mouseX;
-    private double mouseY;
-    private double lifetime;
-    private double angle;
-    private Vector2 mousePosition;
-    private double xVel;
-    private double yVel;
-
-    private bool mouseLock = false;
-
+    double cooldown;
     public Weapon()
     {
-        //origin = new Vector2(100, 100);
-        bullet = new Rectangle(pos.X, pos.Y, 15, 15);
-        speed = 10;
+
     }
-    public void Update()
+    public void Update(int direction, Vector2 position)
     {
-        Console.WriteLine(origin);
-        Console.WriteLine(pos);
-        origin.X = Avatar.rect.x + Avatar.rect.width / 2;
-        origin.Y = Avatar.rect.y + Avatar.rect.height / 2;
-
-        if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT) && Raylib.GetTime() - lifetime >= 0.8f)
+        if (Raylib.IsMouseButtonDown(0) && Raylib.GetTime() - cooldown >= 0.5f)
         {
-            active = true;
-            lifetime = Raylib.GetTime();
-        }
-
-        if (active)
-        {
-            Draw();
-            Shoot();
-            mouseLock = true;
-        }
-        if (pos.X > Raylib.GetScreenWidth() || pos.Y > Raylib.GetScreenHeight() || pos.X < 0 || pos.Y < 0)
-        {
-            active = false;
-            pos = origin;
-            mouseLock = false;
+            cooldown = Raylib.GetTime();
+            Draw(position);
+            Console.WriteLine(direction);
         }
     }
 
-    public void Draw()
+    public void Draw(Vector2 position)
     {
-        //Raylib.DrawRectangle((int)pos.X, (int)pos.Y, (int)bullet.width, (int)bullet.height, Color.BLACK);
-        Raylib.DrawCircle((int)pos.X, (int)pos.Y, 10, Color.BLACK);
-        Raylib.DrawLine((int)origin.X, (int)origin.Y, (int)mouseX, (int)mouseY, Color.BLACK);
-    }
-    public void Shoot()
-    {
-        mouseX = Raylib.GetMousePosition().X;
-        mouseY = Raylib.GetMousePosition().Y;
-
-        mousePosition = new Vector2((float)mouseX, (float)mouseY);
-        xVel = speed * Math.Cos(angle);
-        yVel = speed * Math.Sin(angle);
-        if (!mouseLock)
-        {
-            angle = Math.Atan2(mousePosition.Y - origin.Y, mousePosition.X - origin.X);
-        }
-        pos.X += (float)xVel;
-        pos.Y += (float)yVel;
+        Raylib.DrawCircle((int)position.X, (int)position.Y, 10, Color.BLACK);
     }
 }
