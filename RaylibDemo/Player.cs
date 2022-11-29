@@ -10,6 +10,8 @@ public class Player : Character
             Raylib.LoadTexture("walterB.png"),
             Raylib.LoadTexture("walterF.png")
     };
+    private int direction = 1;
+    private Vector2 position;
 
     public Player()
     {
@@ -19,30 +21,36 @@ public class Player : Character
 
     public override void Update()
     {
+
         if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
         {
             rect.x += Speed;
             sprite = spriteDirection[0];
-            weapon.Update(1, new Vector2(rect.x + sprite.width, rect.y + sprite.height / 2 + 10));
+            direction = 1;
+            position = new Vector2(rect.x + sprite.width, rect.y + sprite.height / 2 + 10);
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
         {
             rect.x -= Speed;
             sprite = spriteDirection[1];
-            weapon.Update(-1, new Vector2(rect.x - 10, rect.y + sprite.height / 2));
+            direction = -1;
+            position = new Vector2(rect.x - 10, rect.y + sprite.height / 2);
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
         {
             rect.y -= Speed;
             sprite = spriteDirection[2];
-            weapon.Update(2, new Vector2(rect.x + sprite.width / 2, rect.y - 10));
+            direction = 2;
+            position = new Vector2(rect.x + sprite.width / 2, rect.y - 10);
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
         {
             rect.y += Speed;
             sprite = spriteDirection[3];
-            weapon.Update(-2, new Vector2(rect.x + sprite.width / 2, rect.y + sprite.height + 10));
+            direction = -2;
+            position = new Vector2(rect.x + sprite.width / 2, rect.y + sprite.height + 10);
         }
+        weapon.Update(direction, position);
 
         base.Update();
     }

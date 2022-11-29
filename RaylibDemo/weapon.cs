@@ -1,7 +1,9 @@
 
 public class Weapon
 {
-    double cooldown;
+    private double cooldown;
+    private int speed = 6;
+    private bool isActive;
     public Weapon()
     {
 
@@ -11,8 +13,11 @@ public class Weapon
         if (Raylib.IsMouseButtonDown(0) && Raylib.GetTime() - cooldown >= 0.5f)
         {
             cooldown = Raylib.GetTime();
+            isActive = true;
+        }
+        if (isActive)
+        {
             Draw(position);
-            Console.WriteLine(direction);
         }
     }
 
