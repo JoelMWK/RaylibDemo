@@ -21,7 +21,6 @@ public class Player : Character
 
     public override void Update()
     {
-
         if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
         {
             rect.x += Speed;
@@ -53,5 +52,24 @@ public class Player : Character
         weapon.Update(direction, position);
 
         base.Update();
+    }
+    public void UpdateBullet(int speed)
+    {
+        if (direction == 1)
+        {
+            position.X += speed;
+        }
+        else if (direction == -1)
+        {
+            position.X -= speed;
+        }
+        else if (direction == 2)
+        {
+            position.Y -= speed;
+        }
+        else if (direction == -2)
+        {
+            position.Y += speed;
+        }
     }
 }

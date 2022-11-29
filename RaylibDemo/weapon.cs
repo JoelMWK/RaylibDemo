@@ -1,9 +1,9 @@
-
 public class Weapon
 {
     private double cooldown;
-    private int speed = 6;
+    private int speed = 12;
     private bool isActive;
+    private int damage = 1;
     public Weapon()
     {
 
@@ -20,9 +20,8 @@ public class Weapon
             Draw(position);
         }
     }
-
     public void Draw(Vector2 position)
     {
-        Raylib.DrawCircle((int)position.X, (int)position.Y, 10, Color.BLACK);
+        Raylib.DrawCircle((int)position.X, (int)position.Y, 8, Color.BLACK);
     }
 }

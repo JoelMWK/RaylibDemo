@@ -3,6 +3,7 @@ public class Character
     protected Rectangle rect;
     protected Texture2D sprite;
     protected float Speed { get; set; } = 3.5f;
+    protected int Hp { get; set; } = 4;
 
     public void Draw()
     {

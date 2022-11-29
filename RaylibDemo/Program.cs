@@ -13,6 +13,7 @@ while (!Raylib.WindowShouldClose())
     //Logik
     walter.Update();
     tortuga.Update();
+    walter.UpdateBullet(12);
 
 
     //Grafik
