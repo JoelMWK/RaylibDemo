@@ -13,7 +13,7 @@ public class Enemy : Character
     {
         Speed = 2.5f;
         sprite = Raylib.LoadTexture("turtle.png");
-        rect = new Rectangle(Raylib.GetScreenHeight(), Raylib.GetScreenWidth(), sprite.width, sprite.height);
+        rect = new Rectangle(Raylib.GetScreenHeight() - 100, Raylib.GetScreenWidth() - 100, sprite.width, sprite.height);
     }
     public override void Update()
     {

@@ -19,9 +19,13 @@ public class Weapon
         {
             Draw(position);
         }
+        /*if (position.X >= Raylib.GetScreenWidth() || position.X <= 0 || position.Y >= Raylib.GetScreenHeight() || position.Y <= 0)
+        {
+            isActive = false;
+        }*/
     }
     public void Draw(Vector2 position)
     {
-        Raylib.DrawCircle((int)position.X, (int)position.Y, 8, Color.BLACK);
+        Raylib.DrawCircle((int)position.X, (int)position.Y, 6, Color.YELLOW);
     }
 }
