@@ -37,7 +37,25 @@ public class Enemy : Character
             rect.y += Speed;
             sprite = spriteDirection[3];
         }
-
+        //PlayerFollow();
+        //TakeDamage();
         base.Update();
     }
+
+    public void PlayerFollow()
+    {
+        foreach (Rectangle path in Map.aiWalkable)
+        {
+            Raylib.DrawRectangleRec(path, Color.WHITE);
+        }
+    }
+    /*public void TakeDamage()
+    {
+        if (Raylib.CheckCollisionCircleRec(position, 6, rect) && Raylib.GetTime() - cooldown >= 0.4f)
+        {
+            cooldown = Raylib.GetTime();
+            Hp--;
+            Console.WriteLine(Hp);
+        }
+    }*/
 }

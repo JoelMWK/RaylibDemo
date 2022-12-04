@@ -1,7 +1,8 @@
 public class Character
 {
-    public Rectangle rect;
+    protected Rectangle rect;
     protected Texture2D sprite;
+    protected double cooldown;
     protected float Speed { get; set; } = 3.5f;
     protected int Hp { get; set; } = 4;
 
@@ -32,18 +33,16 @@ public class Character
     {
         foreach (Rectangle box in Map.mapRect)
         {
-            Rectangle overlap = Raylib.GetCollisionRec(rect, box);
-            Raylib.DrawRectangleRec(overlap, Color.ORANGE);
-
             bool collisionX = Raylib.CheckCollisionRecs(rect, box);
-            bool collisionY = Raylib.CheckCollisionRecs(rect, box);
-
             if (collisionX)
             {
                 if (rect.x >= box.x) rect.x += Speed;
                 else if (rect.x <= box.x) rect.x -= Speed;
             }
-
+        }
+        foreach (Rectangle box in Map.mapRect)
+        {
+            bool collisionY = Raylib.CheckCollisionRecs(rect, box);
             if (collisionY)
             {
                 if (rect.y >= box.y) rect.y += Speed;
