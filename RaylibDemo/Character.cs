@@ -1,6 +1,6 @@
 public class Character
 {
-    protected Rectangle rect;
+    public Rectangle rect;
     protected Texture2D sprite;
     protected double cooldown;
     protected float Speed { get; set; } = 3.5f;

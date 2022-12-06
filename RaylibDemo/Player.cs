@@ -22,7 +22,8 @@ public class Player : Character
 
     public override void Update()
     {
-        if (Raylib.IsMouseButtonDown(0) && Raylib.GetTime() - cooldown >= 0.4f)
+
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && Raylib.GetTime() - cooldown >= 1.2f)
         {
             cooldown = Raylib.GetTime();
             Shoot();

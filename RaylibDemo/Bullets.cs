@@ -5,7 +5,7 @@ public class Bullets
     private int playerDirection;
 
     public Vector2 position;
-    public int magazineSize = 3;
+    public int magazineSize = 1;
     public bool isActive;
 
     public Bullets()

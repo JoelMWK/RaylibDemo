@@ -44,10 +44,7 @@ public class Enemy : Character
 
     public void PlayerFollow()
     {
-        foreach (Rectangle path in Map.aiWalkable)
-        {
-            Raylib.DrawRectangleRec(path, Color.WHITE);
-        }
+       
     }
     /*public void TakeDamage()
     {
