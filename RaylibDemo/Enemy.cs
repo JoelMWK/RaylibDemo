@@ -3,16 +3,16 @@ using System;
 public class Enemy : Character
 {
     private Texture2D[] spriteDirection = {
-            Raylib.LoadTexture("turtle.png"),
-            Raylib.LoadTexture("turtleL.png"),
-            Raylib.LoadTexture("turtleB.png"),
-            Raylib.LoadTexture("turtleF.png")
+            Raylib.LoadTexture("./images/character/turtle.png"),
+            Raylib.LoadTexture("./images/character/turtleL.png"),
+            Raylib.LoadTexture("./images/character/turtleB.png"),
+            Raylib.LoadTexture("./images/character/turtleF.png")
     };
 
     public Enemy()
     {
         Speed = 2.5f;
-        sprite = Raylib.LoadTexture("turtle.png");
+        sprite = Raylib.LoadTexture("./images/character/turtle.png");
         rect = new Rectangle(Raylib.GetScreenHeight() - 100, Raylib.GetScreenWidth() - 100, sprite.width, sprite.height);
     }
     public override void Update()

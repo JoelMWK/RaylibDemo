@@ -1,40 +1,29 @@
 public class Block
 {
-    public List<Rectangle> blockList = new List<Rectangle>();
-    public Texture2D[] blockTexture = new Texture2D[4];
+    public int Type { get; set; }
+    public bool IsBreakable { get; set; }
+    public bool IsPassable { get; set; }
 
-    public int concrete = 1;
-    public int brick = 2;
-    public int metal = 3;
-    public int leaves = 4;
-    public int[] index = new int[4];
+    private Texture2D[] textures = {
+        Raylib.LoadTexture("./images/tile/concrete.png"),
+        Raylib.LoadTexture("./images/tile/brick.png"),
+        Raylib.LoadTexture("./images/tile/metal.png"),
+        Raylib.LoadTexture("./images/tile/leaves.png")
+    };
+    private Texture2D blockTexture;
+    private Rectangle rect;
 
-    private int width;
-    private int height;
-    private bool isBreakable = false;
-    private bool isPassable = false;
-    private bool isBroken = false;
+    private float blockSize = 60;
 
-
-    public void LoadTexture()
+    public Block(int x, int y, int type)
     {
-        if (index[0] == concrete)
-        {
-            blockTexture[0] = Raylib.LoadTexture("concrete.png");
-        }
-        else if (index[1] == brick)
-        {
-            blockTexture[1] = Raylib.LoadTexture("brick.png");
-            isBreakable = true;
-        }
-        else if (index[2] == metal)
-        {
-            blockTexture[2] = Raylib.LoadTexture("metal.png");
-        }
-        else if (index[3] == leaves)
-        {
-            blockTexture[3] = Raylib.LoadTexture("leaves.png");
-            isPassable = true;
-        }
+        Type = type;
+        rect = new Rectangle(x * blockSize, y * blockSize, blockSize, blockSize);
+        blockTexture = textures[Type - 1]; //Type är 1-4 då inget ska ritas på 0. textures[] är 0-1-2-3.
+    }
+
+    public void Draw()
+    {
+        Raylib.DrawTexture(blockTexture, (int)rect.x, (int)rect.y, Color.WHITE);
     }
 }

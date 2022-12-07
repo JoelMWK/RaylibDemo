@@ -4,10 +4,10 @@ public class Player : Character
 {
     private List<Bullets> bullets = new List<Bullets>();
     private Texture2D[] spriteDirection = {
-            Raylib.LoadTexture("walter.png"),
-            Raylib.LoadTexture("walterL.png"),
-            Raylib.LoadTexture("walterB.png"),
-            Raylib.LoadTexture("walterF.png")
+            Raylib.LoadTexture("./images/character/walter.png"),
+            Raylib.LoadTexture("./images/character/walterL.png"),
+            Raylib.LoadTexture("./images/character/walterB.png"),
+            Raylib.LoadTexture("./images/character/walterF.png")
     };
     private int direction = 1;
     private Vector2 origin;
@@ -15,7 +15,7 @@ public class Player : Character
 
     public Player()
     {
-        sprite = Raylib.LoadTexture("walter.png");
+        sprite = Raylib.LoadTexture("./images/character/walter.png");
         rect = new Rectangle(50, 50, sprite.width, sprite.height);
         origin = new Vector2(rect.x + sprite.width + 10, rect.y + sprite.height / 2);
     }
