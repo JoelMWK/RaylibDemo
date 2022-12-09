@@ -38,12 +38,12 @@ public class Bullets
     }
     public void Collision()
     {
-        foreach (Rectangle box in Map.mapRect)
+        /*foreach (Rectangle box in Map.mapRect)
         {
             if (Raylib.CheckCollisionCircleRec(position, 6, box))
             {
                 isActive = false;
             }
-        }
+        }*/
     }
 }

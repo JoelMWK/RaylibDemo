@@ -31,7 +31,7 @@ public class Character
     }
     public void MapCollision()
     {
-        foreach (Rectangle box in Map.mapRect)
+        /*foreach (Rectangle box in m.rect)
         {
             bool collisionX = Raylib.CheckCollisionRecs(rect, box);
             if (collisionX)
@@ -40,7 +40,7 @@ public class Character
                 else if (rect.x <= box.x) rect.x -= Speed;
             }
         }
-        foreach (Rectangle box in Map.mapRect)
+        foreach (Rectangle box in m.rect)
         {
             bool collisionY = Raylib.CheckCollisionRecs(rect, box);
             if (collisionY)
@@ -48,7 +48,7 @@ public class Character
                 if (rect.y >= box.y) rect.y += Speed;
                 else if (rect.y <= box.y) rect.y -= Speed;
             }
-        }
+        }*/
     }
 }
 

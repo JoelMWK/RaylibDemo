@@ -1,38 +1,20 @@
-
 public class Map
 {
-    List<Block> blocks = new();
-    private Texture2D walls = Raylib.LoadTexture("./images/tile/brick.png");
-    public static List<Rectangle> mapRect = new List<Rectangle>();
-    public static List<Rectangle> borderRect = new List<Rectangle>();
+    public List<Block> blocks = new List<Block>();
+    public int[][] Level { get; set; }
 
-    private int[,] level = new int[,]{
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,2,0,2,0,2,0,2,0,2,0,2,0,1},
-        {1,0,2,0,2,0,2,3,2,0,2,0,2,0,1},
-        {1,0,2,0,2,0,2,0,2,0,2,0,2,0,1},
-        {1,0,2,0,2,0,2,0,2,0,2,0,2,0,1},
-        {1,0,2,0,2,0,4,4,4,0,2,0,2,0,1},
-        {1,0,0,0,0,0,2,4,2,0,0,0,0,0,1},
-        {1,3,0,2,2,0,4,4,4,0,2,2,0,3,1},
-        {1,0,0,0,0,0,2,2,2,0,0,0,0,0,1},
-        {1,0,2,0,2,0,2,0,2,0,2,0,2,0,1},
-        {1,0,2,0,2,0,0,0,0,0,2,0,2,0,1},
-        {1,0,2,0,2,0,2,2,2,0,2,0,2,0,1},
-        {1,0,0,0,0,0,2,0,2,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    };
-
-    public void LoadMap()
+    public void LoadMap(string filePath)
     {
-        for (int y = 0; y < level.GetLength(0); y++)
+        string jsonText = File.ReadAllText(filePath);
+        var m = JsonSerializer.Deserialize<Map>(jsonText);
+
+        for (int y = 0; y < m.Level.Length; y++)
         {
-            for (int x = 0; x < level.GetLength(1); x++)
+            for (int x = 0; x < m.Level.Length; x++)
             {
-                if (level[y, x] > 0)
+                if (m.Level[y][x] > 0)
                 {
-                    Block b = new Block(x, y, level[y, x]);
+                    Block b = new Block(x, y, m.Level[y][x]);
                     blocks.Add(b);
                 }
             }

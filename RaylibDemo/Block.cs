@@ -1,18 +1,17 @@
 public class Block
 {
-    public int Type { get; set; }
-    public bool IsBreakable { get; set; }
-    public bool IsPassable { get; set; }
-
-    private Texture2D[] textures = {
+    public static Texture2D[] textures = {
         Raylib.LoadTexture("./images/tile/concrete.png"),
         Raylib.LoadTexture("./images/tile/brick.png"),
         Raylib.LoadTexture("./images/tile/metal.png"),
-        Raylib.LoadTexture("./images/tile/leaves.png")
+        Raylib.LoadTexture("./images/tile/leaves.png"),
+        Raylib.LoadTexture("./images/tile/jr.png")
     };
+    public static int Type { get; set; }
+    public bool IsBreakable { get; set; }
+    public bool IsPassable { get; set; }
     private Texture2D blockTexture;
-    private Rectangle rect;
-
+    protected Rectangle rect;
     private float blockSize = 60;
 
     public Block(int x, int y, int type)
