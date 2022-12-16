@@ -15,15 +15,16 @@ public class Player : Character
 
     public Player()
     {
+        p = this;
+        hp = 2;
         sprite = Raylib.LoadTexture("./images/character/walter.png");
-        rect = new Rectangle(50, 50, sprite.width, sprite.height);
+        rect = new Rectangle(60, 60, sprite.width, sprite.height);
         origin = new Vector2(rect.x + sprite.width + 10, rect.y + sprite.height / 2);
     }
 
     public override void Update()
     {
-
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && Raylib.GetTime() - cooldown >= 1.2f)
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && Timer() >= 0.6f)
         {
             cooldown = Raylib.GetTime();
             Shoot();
@@ -84,13 +85,7 @@ public class Player : Character
         {
             b.Update();
         }
-        for (int i = 0; i < bullets.Count; i++)
-        {
-            if (!bullets[i].isActive)
-            {
-                bullets.RemoveAt(i);
-            }
-        }
+        bullets.RemoveAll(b => !b.isActive);
     }
     public void DrawBullet()
     {

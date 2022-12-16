@@ -8,51 +8,55 @@ public class Enemy : Character
             Raylib.LoadTexture("./images/character/turtleB.png"),
             Raylib.LoadTexture("./images/character/turtleF.png")
     };
+    Random generator = new Random();
+    private int r;
 
     public Enemy()
     {
+        e = this;
+        hp = 4;
         Speed = 2.5f;
         sprite = Raylib.LoadTexture("./images/character/turtle.png");
         rect = new Rectangle(Raylib.GetScreenHeight() - 100, Raylib.GetScreenWidth() - 100, sprite.width, sprite.height);
     }
     public override void Update()
     {
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
+        RandomAction();
+        base.Update();
+    }
+
+    public void RandomAction()
+    {
+        if (Timer() >= 1.4f)
+        {
+            r = generator.Next(1, 5);
+            cooldown = Raylib.GetTime();
+        }
+
+        if (r == 1)
         {
             rect.x += Speed;
             sprite = spriteDirection[0];
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+        else if (r == 2)
         {
             rect.x -= Speed;
             sprite = spriteDirection[1];
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+        else if (r == 3)
         {
             rect.y -= Speed;
             sprite = spriteDirection[2];
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+        else if (r == 4)
         {
             rect.y += Speed;
             sprite = spriteDirection[3];
         }
-        //PlayerFollow();
-        //TakeDamage();
-        base.Update();
     }
 
-    public void PlayerFollow()
+    public bool CheckIfAlive(Enemy e)
     {
-       
+        return e.isAlive;
     }
-    /*public void TakeDamage()
-    {
-        if (Raylib.CheckCollisionCircleRec(position, 6, rect) && Raylib.GetTime() - cooldown >= 0.4f)
-        {
-            cooldown = Raylib.GetTime();
-            Hp--;
-            Console.WriteLine(Hp);
-        }
-    }*/
 }

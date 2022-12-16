@@ -3,11 +3,10 @@ public class Bullets
     private int speed = 12;
     private int damage = 1;
     private int playerDirection;
-
     public Vector2 position;
     public int magazineSize = 1;
     public bool isActive;
-
+    private double cooldown;
     public Bullets()
     {
         isActive = false;
@@ -15,6 +14,7 @@ public class Bullets
     public void Update()
     {
         Collision();
+
         if (playerDirection == 1 || playerDirection == -1)
             position.X += playerDirection * speed;
         else if (playerDirection == 2 || playerDirection == -2)
@@ -38,12 +38,18 @@ public class Bullets
     }
     public void Collision()
     {
-        /*foreach (Rectangle box in Map.mapRect)
+        if (Character.e.ColliderVector(position, 6) && Raylib.GetTime() - cooldown >= 1f)
         {
-            if (Raylib.CheckCollisionCircleRec(position, 6, box))
+            cooldown = Raylib.GetTime();
+            Character.e.hp--;
+        }
+        foreach (Block block in Block.blockList)
+        {
+            if (block.CheckCollisionCircle(position, 6))
             {
+                block.blockHp--;
                 isActive = false;
             }
-        }*/
+        }
     }
 }

@@ -27,4 +27,8 @@ public class Map
             b.Draw();
         }
     }
+    public void BlockCheck()
+    {
+        blocks.RemoveAll(b => b.IsBroken);
+    }
 }
