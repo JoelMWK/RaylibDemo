@@ -56,7 +56,7 @@ public class Character
     {
         foreach (Block block in Block.blockList)
         {
-            if (block.CheckCollisionRecs(rect))
+            if (block.CheckCollisionRecs(rect) && !block.IsBroken && !block.IsPassable)
             {
                 if (rect.x >= block.rect.x) rect.x += Speed;
                 else if (rect.x <= block.rect.x) rect.x -= Speed;
@@ -64,13 +64,12 @@ public class Character
         }
         foreach (Block block in Block.blockList)
         {
-            if (block.CheckCollisionRecs(rect))
+            if (block.CheckCollisionRecs(rect) && !block.IsBroken && !block.IsPassable)
             {
                 if (rect.y >= block.rect.y) rect.y += Speed;
                 else if (rect.y <= block.rect.y) rect.y -= Speed;
             }
         }
-
     }
 }
 

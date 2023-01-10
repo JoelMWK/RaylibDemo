@@ -45,10 +45,11 @@ public class Bullets
         }
         foreach (Block block in Block.blockList)
         {
-            if (block.CheckCollisionCircle(position, 6))
+            if (block.CheckCollisionCircle(position, 6) && !block.IsBroken && !block.IsPassable)
             {
-                block.blockHp--;
                 isActive = false;
+                if (block.IsBreakable)
+                    block.blockHp--;
             }
         }
     }

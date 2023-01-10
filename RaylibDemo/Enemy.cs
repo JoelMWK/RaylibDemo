@@ -11,6 +11,14 @@ public class Enemy : Character
     Random generator = new Random();
     private int r;
 
+    private Vector2[] spawnPoints =
+    {
+        new Vector2(0,0),
+        new Vector2(0,0),
+        new Vector2(0,0),
+        new Vector2(0,0),
+    };
+
     public Enemy()
     {
         e = this;

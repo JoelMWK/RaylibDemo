@@ -2,7 +2,6 @@ public class Map
 {
     public List<Block> blocks = new List<Block>();
     public int[][] Level { get; set; }
-
     public void LoadMap(string filePath)
     {
         string jsonText = File.ReadAllText(filePath);

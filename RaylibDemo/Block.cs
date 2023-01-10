@@ -12,7 +12,7 @@ public class Block
 
     public int blockHp = 3;
     public int Type { get; set; }
-    public bool IsBreakable { get; set; }
+    public bool IsBreakable { get; set; } = false;
     public bool IsPassable { get; set; }
     public bool IsBroken
     {
@@ -32,6 +32,15 @@ public class Block
         rect = new Rectangle(x * blockSize, y * blockSize, blockSize, blockSize);
         blockList.Add(this);        // blockList.Add(rect = new Rectangle(x * blockSize, y * blockSize, blockSize, blockSize));
         blockTexture = textures[Type - 1]; //Type är 1-4 då inget ska ritas på 0. textures[] är 0-1-2-3.
+
+        if (Type == 2 || Type == 5)
+        {
+            IsBreakable = true;
+        }
+        else if (Type == 4)
+        {
+            IsPassable = true;
+        }
     }
 
     public void Draw()
