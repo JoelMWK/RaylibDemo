@@ -17,7 +17,7 @@ public class Character
     public static Player p;
     public static Enemy e;
 
-    public void Draw()
+    public virtual void Draw()
     {
         Raylib.DrawTexture(sprite, (int)rect.x, (int)rect.y, Color.WHITE);
     }
@@ -31,45 +31,29 @@ public class Character
     }
     public virtual void Update()
     {
-        // if (rect.x <= 0)
-        // {
-        //     rect.x = 0;
-        // }
-        // if (rect.x + sprite.width >= Raylib.GetScreenWidth())
-        // {
-        //     rect.x = Raylib.GetScreenWidth() - sprite.width;
-        // }
-        // if (rect.y <= 0)
-        // {
-        //     rect.y = 0;
-        // }
-        // if (rect.y + sprite.height >= Raylib.GetScreenHeight())
-        // {
-        //     rect.y = Raylib.GetScreenHeight() - sprite.height;
-        // }
+        foreach (Block block in Block.blockList)
+        {
+            if (block.CheckCollisionRecs(rect) && !block.IsBroken && !block.IsPassable)
+            {
+                if (rect.x + rect.width >= block.rect.x) rect.x -= Speed;
+                if (rect.x <= block.rect.x + block.rect.width) rect.x += Speed;
+                if (rect.y <= block.rect.y) rect.y -= Speed;
+                if (rect.y + rect.height >= block.rect.y + block.rect.height) rect.y += Speed;
+            }
+        }
+
+        foreach (Enemy enemy in EnemySpawner.enemy)
+        {
+            if (enemy.ColliderRect(p.rect) && Timer() >= 1.4f)
+            {
+                cooldown = Raylib.GetTime();
+                p.hp--;
+            }
+        }
     }
     public double Timer()
     {
         return Raylib.GetTime() - cooldown;
-    }
-    public void MapCollision()
-    {
-        foreach (Block block in Block.blockList)
-        {
-            if (block.CheckCollisionRecs(rect) && !block.IsBroken && !block.IsPassable)
-            {
-                if (rect.x >= block.rect.x) rect.x += Speed;
-                else if (rect.x <= block.rect.x) rect.x -= Speed;
-            }
-        }
-        foreach (Block block in Block.blockList)
-        {
-            if (block.CheckCollisionRecs(rect) && !block.IsBroken && !block.IsPassable)
-            {
-                if (rect.y >= block.rect.y) rect.y += Speed;
-                else if (rect.y <= block.rect.y) rect.y -= Speed;
-            }
-        }
     }
 }
 

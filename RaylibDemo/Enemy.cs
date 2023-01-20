@@ -2,35 +2,34 @@ using System;
 
 public class Enemy : Character
 {
-    private Texture2D[] spriteDirection = {
+    private static Texture2D[] spriteDirection = {
             Raylib.LoadTexture("./images/character/turtle.png"),
             Raylib.LoadTexture("./images/character/turtleL.png"),
             Raylib.LoadTexture("./images/character/turtleB.png"),
             Raylib.LoadTexture("./images/character/turtleF.png")
     };
-    Random generator = new Random();
-    private int r;
-
-    private Vector2[] spawnPoints =
-    {
-        new Vector2(0,0),
-        new Vector2(0,0),
-        new Vector2(0,0),
-        new Vector2(0,0),
-    };
+    private Random generator = new Random();
+    private int r, rx, ry;
 
     public Enemy()
     {
-        e = this;
+        sprite = spriteDirection[0];
+        rx = generator.Next(200, 700);
+        ry = generator.Next(200, 700);
         hp = 4;
         Speed = 2.5f;
-        sprite = Raylib.LoadTexture("./images/character/turtle.png");
-        rect = new Rectangle(Raylib.GetScreenHeight() - 100, Raylib.GetScreenWidth() - 100, sprite.width, sprite.height);
+        rect = new Rectangle(rx, ry, sprite.width, sprite.height);
     }
     public override void Update()
     {
         RandomAction();
         base.Update();
+    }
+    public override void Draw()
+    {
+        if (isAlive)
+            base.Draw();
+        Raylib.DrawText(hp + "/4", (int)rect.x, (int)rect.y, 20, Color.WHITE);
     }
 
     public void RandomAction()
@@ -61,10 +60,5 @@ public class Enemy : Character
             rect.y += Speed;
             sprite = spriteDirection[3];
         }
-    }
-
-    public bool CheckIfAlive(Enemy e)
-    {
-        return e.isAlive;
     }
 }

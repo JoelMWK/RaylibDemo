@@ -1,7 +1,6 @@
 public class Block
 {
     public static List<Block> blockList = new List<Block>();
-    // public static List<Rectangle> blockList = new List<Rectangle>();
     private static Texture2D[] textures = {
         Raylib.LoadTexture("./images/tile/concrete.png"),
         Raylib.LoadTexture("./images/tile/brick.png"),
@@ -33,14 +32,8 @@ public class Block
         blockList.Add(this);        // blockList.Add(rect = new Rectangle(x * blockSize, y * blockSize, blockSize, blockSize));
         blockTexture = textures[Type - 1]; //Type är 1-4 då inget ska ritas på 0. textures[] är 0-1-2-3.
 
-        if (Type == 2 || Type == 5)
-        {
-            IsBreakable = true;
-        }
-        else if (Type == 4)
-        {
-            IsPassable = true;
-        }
+        if (Type == 2 || Type == 5) IsBreakable = true;
+        else if (Type == 4) IsPassable = true;
     }
 
     public void Draw()

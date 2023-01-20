@@ -24,12 +24,19 @@ public class Player : Character
 
     public override void Update()
     {
+        if (hp <= 0 && Timer() >= 3.0f)
+        {
+            cooldown = Raylib.GetTime();
+            Environment.Exit(0);
+        }
+        Raylib.DrawText(hp + "/2", 60, 60, 20, Color.WHITE);
         if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && Timer() >= 0.6f)
         {
             cooldown = Raylib.GetTime();
             Shoot();
         }
         UpdateBullet();
+
         if (Raylib.IsKeyDown(KeyboardKey.KEY_D) && !pressed)
         {
             pressed = true;
@@ -68,7 +75,7 @@ public class Player : Character
     }
 
     //----------Bullets-----------//
-    public void Shoot()
+    private void Shoot()
     {
         Bullets b = new();
 
@@ -79,7 +86,7 @@ public class Player : Character
             bullets.Add(b);
         }
     }
-    public void UpdateBullet()
+    private void UpdateBullet()
     {
         foreach (Bullets b in bullets)
         {

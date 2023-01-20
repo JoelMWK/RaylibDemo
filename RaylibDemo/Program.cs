@@ -7,9 +7,10 @@ Raylib.InitWindow(900, 900, "Breaking Tank");
 Raylib.SetTargetFPS(60);
 
 Player walter = new Player();
-Enemy tortuga = new Enemy();
+EnemySpawner tortuga = new EnemySpawner();
 Map map = new Map();
-map.LoadMap("./stages/stage3.json");
+map.LoadMap("./stages/stage1.json");
+
 
 while (!Raylib.WindowShouldClose())
 {
@@ -17,8 +18,6 @@ while (!Raylib.WindowShouldClose())
     walter.Update();
     tortuga.Update();
     map.BlockCheck();
-    walter.MapCollision();
-    tortuga.MapCollision();
 
     //Grafik
     Raylib.BeginDrawing();

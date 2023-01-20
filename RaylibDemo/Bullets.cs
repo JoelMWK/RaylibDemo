@@ -1,7 +1,6 @@
 public class Bullets
 {
     private int speed = 12;
-    private int damage = 1;
     private int playerDirection;
     public Vector2 position;
     public int magazineSize = 1;
@@ -21,9 +20,7 @@ public class Bullets
             position.Y += playerDirection / 2 * speed;
 
         if (position.X >= Raylib.GetScreenWidth() || position.X <= 0 || position.Y >= Raylib.GetScreenHeight() || position.Y <= 0)
-        {
             isActive = false;
-        }
     }
     public void Shoot(Vector2 origin, int direction)
     {
@@ -38,10 +35,14 @@ public class Bullets
     }
     public void Collision()
     {
-        if (Character.e.ColliderVector(position, 6) && Raylib.GetTime() - cooldown >= 1f)
+        foreach (Enemy enemy in EnemySpawner.enemy)
         {
-            cooldown = Raylib.GetTime();
-            Character.e.hp--;
+            if (enemy.ColliderVector(position, 6) && Raylib.GetTime() - cooldown >= 1f)
+            {
+                cooldown = Raylib.GetTime();
+                enemy.hp--;
+                isActive = false;
+            }
         }
         foreach (Block block in Block.blockList)
         {
