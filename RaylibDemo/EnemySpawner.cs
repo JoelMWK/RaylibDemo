@@ -1,6 +1,7 @@
 public class EnemySpawner
 {
     public static List<Enemy> enemy = new List<Enemy>();
+    double cooldown;
 
     public void Spawn()
     {
@@ -13,13 +14,16 @@ public class EnemySpawner
     }
     public void Update()
     {
-        if (Raylib.IsMouseButtonPressed(0))
+        if (Raylib.GetTime() - cooldown >= 5f)
         {
+            cooldown = Raylib.GetTime();
             Spawn();
         }
         foreach (Enemy e in enemy)
         {
             e.Update();
+            if (!e.isAlive)
+                Player.p.score++;
         }
         enemy.RemoveAll(e => !e.isAlive);
     }

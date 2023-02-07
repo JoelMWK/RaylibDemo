@@ -37,9 +37,8 @@ public class Bullets
     {
         foreach (Enemy enemy in EnemySpawner.enemy)
         {
-            if (enemy.ColliderVector(position, 6) && Raylib.GetTime() - cooldown >= 1f)
+            if (enemy.ColliderVector(position, 6))
             {
-                cooldown = Raylib.GetTime();
                 enemy.hp--;
                 isActive = false;
             }
